@@ -1,6 +1,6 @@
 function el = elevation(ENU, el_mask)
 
-    [n, ~] = size(ENU);
+    n = size(ENU, 1);
     
     el = nan(1, n);
     

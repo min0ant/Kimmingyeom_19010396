@@ -1,6 +1,6 @@
 function az = azimuth(ENU)
-   
-    [n, ~] = size(ENU);
+
+    n = size(ENU, 1);
 
     az = zeros(1, n);
     
@@ -16,3 +16,4 @@ function az = azimuth(ENU)
         end
     end
 end
+
