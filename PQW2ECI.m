@@ -1,16 +1,15 @@
-function [A] = PQW2ECI(arg_prg,inc_angle,RAAN)
-R1 = [cosd(arg_prg) sind(arg_prg) 0;
-    -sind(arg_prg) cosd(arg_prg) 0;
+function rotation_matrix = PQW2ECI(arg_prg,inc_angle,RANN)
+d2r = pi/180;
+arg_prg_rad = arg_prg*d2r;
+inc_angle_rad = inc_angle*d2r;
+RANN_rad = RANN*d2r;
+R_w3=[cos(arg_prg_rad) sin(arg_prg_rad) 0;
+    -sin(arg_prg_rad) cos(arg_prg_rad) 0;
     0 0 1];
-
-R2 = [1 0 0;
-    0 cosd(inc_angle) sind(inc_angle);
-    0 -sind(inc_angle) cosd(inc_angle)];
-
-R3 = [cosd(RAAN) sind(RAAN) 0;
-    -sind(RAAN) cosd(RAAN) 0;
+R_i1=[1 0 0;
+    0 cos(inc_angle_rad) sin(inc_angle_rad);
+    0 -sin(inc_angle_rad) cos(inc_angle_rad)];
+R_o3=[cos(RANN_rad) sin(RANN_rad) 0;
+    -sin(RANN_rad) cos(RANN_rad) 0;
     0 0 1];
-
-R = R1*R2*R3;
-A = inv(R);
-end
+rotation_matrix = transpose((R_w3*R_i1*R_o3));
